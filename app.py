@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -28,7 +28,7 @@ class Node:
 
 
 class AStarAlgorithm:
-    """Optimized A* pathfinding algorithm"""
+    """A* pathfinding algorithm"""
 
     DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
@@ -100,7 +100,7 @@ class AStarAlgorithm:
 
 
 class PathfindingVisualizerUI:
-    """Clean UI matching the screenshot design"""
+    """Frontend UI"""
 
     def __init__(self, root):
         self.root = root
@@ -244,7 +244,13 @@ class PathfindingVisualizerUI:
             self.cols = int(self.cols_entry.get())
 
             if self.rows <= 0 or self.cols <= 0:
-                raise ValueError("Dimensions must be positive")
+                tk.messagebox.showerror(
+                    "Invalid Dimensions",
+                    "Grid dimensions must be positive numbers.\n\n"
+                    f"Rows: {self.rows}\n"
+                    f"Cols: {self.cols}",
+                )
+                return
 
             self.grid = np.zeros((self.rows, self.cols))
             self.start = None
@@ -256,7 +262,11 @@ class PathfindingVisualizerUI:
             self.update_display()
 
         except ValueError as e:
-            print(f"Invalid input: {e}")
+            tk.messagebox.showerror(
+                "Invalid Input",
+                "Please enter valid integer values for rows and columns.\n\n"
+                f"Error: {str(e)}",
+            )
 
     def clear_path(self):
         if self.grid is not None:
@@ -393,7 +403,7 @@ class PathfindingVisualizerUI:
         self.animating = True
         self.update_display(full_redraw=True)
 
-        algorithm = OptimizedAStarAlgorithm(self.grid, self.start, self.end)
+        algorithm = AStarAlgorithm(self.grid, self.start, self.end)
         visited_order, path = algorithm.find_path()
 
         self.animate_search(visited_order, path)
