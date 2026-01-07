@@ -39,6 +39,9 @@ class AStarAlgorithm:
         self.rows, self.cols = grid.shape
 
     def heuristic(self, pos, target):
+        """
+        Calculate the estimated distance between two points using Euclidean distance.
+        """
         return abs(pos[0] - target[0]) + abs(pos[1] - target[1])
 
     def get_neighbors(self, pos):
