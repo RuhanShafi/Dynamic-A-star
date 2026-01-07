@@ -1,7 +1,7 @@
 # Dynamic & Interactive A* Visualizer
 
 <div align="center">
-  <video src="media\A-Star.mp4" width="100%" />
+  <video src="https://github.com/user-attachments/assets/1edcbfdd-bea3-45c6-b8d6-dd98d022df21" width="100%" />
 </div>
 
 A simple A* Visualizer written in Python where the user can define a start & end point and create obstacles and see a visualization of the A* algorithm trying to find the optimal path from start to finish. I built this project to learn how to implement A* algorithm in a real world scenario and to learn the basics of building GUIs in the Python `tkinter` library.
